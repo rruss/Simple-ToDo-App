@@ -130,8 +130,7 @@ def task_list_detail(request, pk):
             return Response(data)
         elif method == 'delete':
             task.delete()
-            data = f'<html><body><h1>$Your task has been successfully deleted!</h1><br><a href="/api/todo/">Back</a></body></html>'
-            return Response(data)
+            return Response(template_name='empty.html')
     data = f'<html><body><h1>${status.HTTP_204_NO_CONTENT}</h1><br><a href="/api/todo/">Back</a></body></html>'
     return Response(data)
 
