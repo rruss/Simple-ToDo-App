@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %} <img src="https://image.flaticon.com/icons/png/512/44/44948.png" width="20" height="20"> {{ created_by }} {% endblock %}
+
+</head>
+<body>
+    <a href="/api/form-create/"><img src="https://icons-for-free.com/iconfiles/png/512/create+cross+new+plus+icon-1320168707626274697.png" width="15" height="15"></a>
+    {% for task in tasks %}
+        <h4><a href="/api/todo/{{ task.id }}">{{ task.id }}</a></h4>
+        <h4>{{ task.name }}</h4>
+        <p>Is task executed: {{ task.is_executed }}</p>
+        <b>{{ task.execution_date }}</b><br><br>
+    {% endfor %}
+</body>
+</html>

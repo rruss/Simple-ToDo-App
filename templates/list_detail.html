@@ -1,0 +1,27 @@
+{% load rest_framework %}
+{% block title %} <img src="https://image.flaticon.com/icons/png/512/44/44948.png" width="20" height="20"> {{ created_by }} {% endblock %}
+{% block content %}<br><br>
+    {% csrf_token %}
+    <a href="/api/todo/">Home</a>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    {{ task_id }}<br>
+    <form id="submit" action="{% url 'execute' task_id %}" method="post" novalidate>
+        {% if is_executed %}
+                <img src="https://img.icons8.com/all/500/checked-checkbox.png" width="15" height="15" onclick="document.getElementById('submit').submit()">
+
+        {% else %}
+                <img src="https://img.icons8.com/all/500/unchecked-checkbox.png" width="15" height="15" onclick="document.getElementById('submit').submit()">
+        {% endif %}
+    </form>
+    <h3>{{ name }}</h3><br>
+    <i><p>{{ description }}</p></i>
+    <b>{{ execution_date }}</b><br>
+
+    <a href="/api/form-alter/{{ task_id }}/"><img src="https://icons-for-free.com/iconfiles/png/512/edit+icon-1320166902506410056.png" width="15" height="15"></a>
+
+    <form id="delete" action="{% url 'alter' task_id %}" method="post" novalidate>
+        <input type="hidden" name="_method" value="DELETE"><br>
+        <button type="submit" class="btn btn-default">Delete</button>
+    </form>
+{% endblock %}
+
