@@ -4,6 +4,8 @@ from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIV
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import TemplateHTMLRenderer, StaticHTMLRenderer
 from rest_framework.views import APIView
+
+from ToDo.api.mail import Mailer
 from ..serializers import TaskFullSerializer, TaskSerializer, ExecuteSerializer
 from ..models import Task, MyUser
 from rest_framework.response import Response
@@ -146,6 +148,13 @@ def ExecuteTask(request, pk):
         else:
             task.is_executed = True
         task.save()
+        mail = Mailer()
+        mail.send_messages(subject='My task execution',
+                           template='message.html',
+                           context={'created_by': task.created_by,
+                                    'task': task.name,
+                                    'is_executed_by': task.is_executed},
+                           to_emails=[task.created_by.email])
     except Task.DoesNotExist as e:
         data = f'<html><body><h1>${e, status.HTTP_404_NOT_FOUND}</h1><br><a href="/api/todo/">Back</a></body></html>'
         return Response(data)
@@ -160,6 +169,7 @@ def ExecuteTask(request, pk):
             context = {
                 "tasks": tasks
             }
+
         # ser = TaskSerializer(instance=task, data=request.data)
         # if ser.is_valid():
         #     ser.save()

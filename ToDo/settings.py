@@ -35,6 +35,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'djcelery',
+    'djcelery_email',
 
     'rest_framework',
     'rest_framework.authtoken',
@@ -119,6 +121,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+CELERY_BROKER_URL = 'amqp://guest:guest@localhost:5672/'
+
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -130,3 +134,16 @@ REST_FRAMEWORK = {
         'django_filters.rest_framework.DjangoFilterBackend',
     )
 }
+broker_url = 'amqp://myuser:mypassword@localhost:5672/myvhost'
+
+EMAIL_HOST = 'SMTP_HOST'
+
+EMAIL_PORT = 'SMTP_PORT'
+
+EMAIL_HOST_USER = 'SMTP_USER'
+
+EMAIL_HOST_PASSWORD = 'SMTP_PASSWORD'
+
+EMAIL_USE_TLS = True # TLS settings
+
+EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'
