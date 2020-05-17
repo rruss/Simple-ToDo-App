@@ -24,6 +24,7 @@ $ git clone https://github.com/rruss/Simple-ToDo-App
 
 
 Run RabbitMQ server:
+
 If you are using OS other than unix-like, just google for it ))
 
 ```
