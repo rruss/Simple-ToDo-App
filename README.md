@@ -14,6 +14,9 @@ What can this app do?
 
 Make sure that you've installed all packages.
 
+Note:
+If you are using OS other than unix-like, just google for respective commands))
+
 ## Usage
 
 Clone it!
@@ -25,7 +28,7 @@ $ git clone https://github.com/rruss/Simple-ToDo-App
 
 Run RabbitMQ server:
 
-If you are using OS other than unix-like, just google for it ))
+
 
 ```
 $ sudo rabbitmq-server
