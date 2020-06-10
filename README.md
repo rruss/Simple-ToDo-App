@@ -8,7 +8,7 @@ What can this app do?
 - Setting execution status
 - sending email about status of execution
 
-## Requirement
+## Requirements
 
 - Redis
 - see requirements.txt
@@ -16,6 +16,7 @@ What can this app do?
 Make sure that you've installed all packages.
 
 Note:
+In 'settings.py' configure broker and email settings
 If you are using OS other than unix-like, just google for respective commands))
 
 ## Usage
