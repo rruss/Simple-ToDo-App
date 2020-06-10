@@ -1,5 +1,6 @@
-Django==3.0.6
-amqp==2.6.0
+Django==3.0.7
+amqp==2.5.2
+anyjson==0.3.3
 asgiref==3.2.7
 billiard==3.6.3.0
 celery==4.4.5

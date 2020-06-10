@@ -8,13 +8,15 @@ What can this app do?
 - Setting execution status
 - sending email about status of execution
 
-## Requirement
+## Requirements
 
+- Redis
 - see requirements.txt
 
 Make sure that you've installed all packages.
 
 Note:
+In 'settings.py' configure broker and email settings
 If you are using OS other than unix-like, just google for respective commands))
 
 ## Usage
@@ -26,28 +28,28 @@ $ git clone https://github.com/rruss/Simple-ToDo-App
 ```
 
 
-Run RabbitMQ server:
+Run Redis server:
 
 
 
 ```
-$ sudo rabbitmq-server
+$ redis-server
 ```
 
 
 Run Celery using:
 
 ```
-$ celery -A djcelery worker -l info
+$ celery -A ToDo worker -l info
 ```
 
-Go into the project directory and:
+Go into the project directory and after migrating everything:
 
 ```
 $ python manage.py runserver
 ```
 
-Open `http://127.0.0.1:8000/` and enjoy!
+Open `http://127.0.0.1:8000/api/` and enjoy!
 
 
 ## Contributors
