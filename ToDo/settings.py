@@ -28,20 +28,25 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-INSTALLED_APPS = [
+CORE_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'djcelery',
-    'djcelery_email',
+]
 
+EXTERNAL_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
+]
+
+PROJECT_APPS = [
     'ToDo.api',
 ]
+
+INSTALLED_APPS = CORE_APPS + EXTERNAL_APPS + PROJECT_APPS
 
 AUTH_USER_MODEL = 'api.MyUser'
 
@@ -121,8 +126,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-CELERY_BROKER_URL = 'amqp://guest:guest@localhost:5672/'
-
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -134,16 +137,30 @@ REST_FRAMEWORK = {
         'django_filters.rest_framework.DjangoFilterBackend',
     )
 }
-broker_url = 'amqp://myuser:mypassword@localhost:5672/myvhost'
 
-EMAIL_HOST = 'SMTP_HOST'
 
-EMAIL_PORT = 'SMTP_PORT'
+#celery
+#you can use different broker if you like
 
-EMAIL_HOST_USER = 'SMTP_USER'
+CELERY_BROKER_URL = 'url for broker' #defaul localhost for redis: 'redis://localhost:6379'
 
-EMAIL_HOST_PASSWORD = 'SMTP_PASSWORD'
+CELERY_RESULT_BACKEND = "redis"
+CELERY_REDIS_HOST = 'hostname of your broker' #"localhost"
+CELERY_REDIS_PORT = 'port of redis' #default is 6379
+CELERY_REDIS_DB = 'number' #default is 0
+EMAIL_HOST = 'smtp of chosen email system' #I've used google mail: 'smtp.gmail.com'
+EMAIL_USE_TLS = 'Will you use?' #True
+EMAIL_PORT = 'port of email' #default is 587
+EMAIL_HOST_USER = 'from where you want to send emails'
+EMAIL_HOST_PASSWORD = 'password'
 
-EMAIL_USE_TLS = True # TLS settings
+# CACHES = {
+#     "default": {
+#         "BACKEND": "django_redis.cache.RedisCache",
+#         "LOCATION": "redis://127.0.0.1:6379/1",
+#         "OPTIONS": {
+#             "CLIENT_CLASS": "django_redis.client.DefaultClient",
+#         }
+#     }
+# }
 
-EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'

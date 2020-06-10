@@ -1,16 +1,11 @@
-from django.shortcuts import render, redirect
-from django.http import Http404
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, CreateAPIView
-from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import TemplateHTMLRenderer, StaticHTMLRenderer
-from rest_framework.views import APIView
 
-from ToDo.api.mail import Mailer
-from ..serializers import TaskFullSerializer, TaskSerializer, ExecuteSerializer
-from ..models import Task, MyUser
+from ..serializers import TaskSerializer
+from ..models import Task
 from rest_framework.response import Response
-from rest_framework.decorators import api_view, permission_classes, renderer_classes
+from rest_framework.decorators import api_view, renderer_classes
 from rest_framework import status
+from ... import tasks as celery
 
 
 @api_view(['GET'])
@@ -59,7 +54,7 @@ def form_alter(request, pk):
 def taskLists(request):
     if request.method == 'GET':
         tasks = Task.objects.all()
-        if tasks.count() >= 0:
+        if tasks.count() > 0:
             context = {
                 "created_by": tasks[0].created_by,
                 "tasks": tasks
@@ -145,16 +140,11 @@ def ExecuteTask(request, pk):
         task = Task.objects.get(id=pk)
         if task.is_executed:
             task.is_executed = False
+            task_execution = 'undone'
         else:
             task.is_executed = True
+            task_execution = 'done'
         task.save()
-        mail = Mailer()
-        mail.send_messages(subject='My task execution',
-                           template='message.html',
-                           context={'created_by': task.created_by,
-                                    'task': task.name,
-                                    'is_executed_by': task.is_executed},
-                           to_emails=[task.created_by.email])
     except Task.DoesNotExist as e:
         data = f'<html><body><h1>${e, status.HTTP_404_NOT_FOUND}</h1><br><a href="/api/todo/">Back</a></body></html>'
         return Response(data)
@@ -165,6 +155,9 @@ def ExecuteTask(request, pk):
                 "created_by": tasks[0].created_by,
                 "tasks": tasks
             }
+            message = f'Hey there! Your task {task.name} with description: {task.description}' \
+                      f' is {task_execution}.'
+            celery.send_email.delay(message, str(task.created_by.email)).get()
         else:
             context = {
                 "tasks": tasks
