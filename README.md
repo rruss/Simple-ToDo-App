@@ -13,7 +13,7 @@ What can this app do?
 
 - docker-compose
 
-Make sure that you've installed it properlyfrom https://docs.docker.com/compose/install/.
+Make sure that you've installed it properly from https://docs.docker.com/compose/install/.
 
 Note:
 
