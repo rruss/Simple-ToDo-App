@@ -24,7 +24,7 @@ SECRET_KEY = 'o=e%pgi9$uqk9ry7612k)bf+m82t+nh8f+rww1u#yniyyyrcdp'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', ]
 
 # Application definition
 
@@ -138,29 +138,30 @@ REST_FRAMEWORK = {
     )
 }
 
-
 #celery
-#you can use different broker if you like
+# I've used redis as a message broker and google mailing system, you can use different ones if you like
 
-CELERY_BROKER_URL = 'url for broker' #defaul localhost for redis: 'redis://localhost:6379'
+CELERY_BROKER_URL = 'redis://redis:6379/0'
 
-CELERY_RESULT_BACKEND = "redis"
-CELERY_REDIS_HOST = 'hostname of your broker' #"localhost"
-CELERY_REDIS_PORT = 'port of redis' #default is 6379
-CELERY_REDIS_DB = 'number' #default is 0
-EMAIL_HOST = 'smtp of chosen email system' #I've used google mail: 'smtp.gmail.com'
-EMAIL_USE_TLS = 'Will you use?' #True
-EMAIL_PORT = 'port of email' #default is 587
+CELERY_RESULT_BACKEND = 'redis://redis:6379/0'
+# CELERY_REDIS_HOST = "localhost"
+# CELERY_REDIS_PORT = 6379
+# CELERY_REDIS_DB = 0
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+
 EMAIL_HOST_USER = 'from where you want to send emails'
 EMAIL_HOST_PASSWORD = 'password'
 
-# CACHES = {
-#     "default": {
-#         "BACKEND": "django_redis.cache.RedisCache",
-#         "LOCATION": "redis://127.0.0.1:6379/1",
-#         "OPTIONS": {
-#             "CLIENT_CLASS": "django_redis.client.DefaultClient",
-#         }
-#     }
-# }
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
 

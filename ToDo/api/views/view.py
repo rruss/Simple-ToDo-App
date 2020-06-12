@@ -80,7 +80,7 @@ def taskLists(request):
                     "tasks": tasks
                 }
             return Response(context, status=status.HTTP_201_CREATED, template_name='tasks.html')
-        data = f'<html><body><h1>${status.HTTP_500_INTERNAL_SERVER_ERROR}</h1><br><a href="/api/todo/">Back</a></body></html>'
+        data = f'<html><body><h1>${status.HTTP_500_INTERNAL_SERVER_ERROR}</h1><br><a href="/todo/">Back</a></body></html>'
         return Response(data)
 
 
@@ -91,7 +91,7 @@ def task_list_detail(request, pk):
     try:
         task = Task.objects.get(id=pk)
     except Task.DoesNotExist as e:
-        data = f'<html><body><h1>${e}</h1><br><a href="/api/todo/">Back</a></body></html>'
+        data = f'<html><body><h1>${e}</h1><br><a href="/todo/">Back</a></body></html>'
         return Response(data)
 
     if request.method == 'GET':
@@ -123,12 +123,12 @@ def task_list_detail(request, pk):
                     "is_executed": task.is_executed
                 }
                 return Response(context, status=status.HTTP_202_ACCEPTED, template_name='list_detail.html')
-            data = f'<html><body><h1>${status.HTTP_400_BAD_REQUEST}</h1><br><a href="/api/todo/">Back</a></body></html>'
+            data = f'<html><body><h1>${status.HTTP_400_BAD_REQUEST}</h1><br><a href="/todo/">Back</a></body></html>'
             return Response(data)
         elif method == 'delete':
             task.delete()
             return Response(template_name='empty.html')
-    data = f'<html><body><h1>${status.HTTP_204_NO_CONTENT}</h1><br><a href="/api/todo/">Back</a></body></html>'
+    data = f'<html><body><h1>${status.HTTP_204_NO_CONTENT}</h1><br><a href="/todo/">Back</a></body></html>'
     return Response(data)
 
 
@@ -146,7 +146,7 @@ def ExecuteTask(request, pk):
             task_execution = 'done'
         task.save()
     except Task.DoesNotExist as e:
-        data = f'<html><body><h1>${e, status.HTTP_404_NOT_FOUND}</h1><br><a href="/api/todo/">Back</a></body></html>'
+        data = f'<html><body><h1>${e, status.HTTP_404_NOT_FOUND}</h1><br><a href="/todo/">Back</a></body></html>'
         return Response(data)
     if request.method == "POST":
         tasks = Task.objects.all()

@@ -1,12 +1,12 @@
 {% load rest_framework %}
 
 {% if token %}<br>
-    <p>You're now authorized. Click <a href="/api/todo/">there</a> to see your tasks this.</p>
+    <p>You're now authorized. Click <a href="/todo/">there</a> to see your tasks this.</p>
     {{ token }}
     {% else %}
         <h1>Hey there! </h1>
         <p>This is an simple <b>TODO</b> app.</p><br>
-        <p>First of all you need to register by clicking <a href="/api/form-login/">this</a>.</p>
+        <p>First of all you need to register by clicking <a href="/form-login/">this</a>.</p>
 {% endif %}
 
 {% block content %}

@@ -2,7 +2,7 @@
 {% block title %} <img src="https://image.flaticon.com/icons/png/512/44/44948.png" width="20" height="20"> {{ created_by }} {% endblock %}
 {% block content %}<br><br>
     {% csrf_token %}
-    <a href="/api/todo/">Home</a>
+    <a href="/todo/">Home</a>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     {{ task_id }}<br>
     <form id="submit" action="{% url 'execute' task_id %}" method="post" novalidate>
