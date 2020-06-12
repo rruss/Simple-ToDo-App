@@ -2,24 +2,22 @@
 Simple ToDo App☑️  on Python(Django) using DRF
 
 What can this app do?
-- Authorization (using email only)
+- Authorization (using email only) [Registration is under process]
 - Creating tasks
 - Altering tasks
 - Setting execution status (like done/undone)
 - sending email about status of execution
 
+
 ## Requirements
 
-- Redis
-- see requirements.txt
+- docker-compose
 
-Make sure that you've installed all packages.
+Make sure that you've installed it properlyfrom https://docs.docker.com/compose/install/.
 
 Note:
 
-In 'settings.py' configure broker and email settings.
-
-If you are using OS other than unix-like, just google for respective commands))
+In 'settings.py' configure email settings.
 
 ## Usage
 
@@ -30,35 +28,31 @@ $ git clone https://github.com/rruss/Simple-ToDo-App
 ```
 
 
-Run Redis server:
+Build containers:
 
 
 
 ```
-$ redis-server
+$ docker-compose build
 ```
 
 
-Run Celery using:
+Run the builded containers:
 
 ```
-$ celery -A ToDo worker -l info
+$ docker-compose up
 ```
 
-Go into the project directory and after migrating everything:
 
-```
-$ ./manage.py runserver
-```
 
-Open `http://127.0.0.1:8000/api/` and enjoy!
+Open `http://0.0.0.0:8000` and enjoy!
 
 
 
 
 P.S:
 
-If you're faced with error "bad credentials", fix it by reducing security, for instance, allow less secure apps.
+If you're faced with error "bad credentials", fix it by reducing security of mailing system, for instance, allow less secure apps.
 
 For gmail go to https://myaccount.google.com/lesssecureapps and turn on it.
 
