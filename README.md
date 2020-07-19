@@ -13,7 +13,7 @@ What can this app do?
 
 - docker-compose
 
-Make sure that you've installed it properly from https://docs.docker.com/compose/install/.
+Make sure that you've installed it properly from https://docs.docker.com/compose/install.
 
 Note:
 
@@ -54,9 +54,9 @@ P.S:
 
 If you're faced with error "bad credentials", fix it by reducing security of mailing system, for instance, allow less secure apps.
 
-For gmail go to https://myaccount.google.com/lesssecureapps and turn on it.
+For gmail, go to https://myaccount.google.com/lesssecureapps and turn on it.
 
 
 ## Contributors
 
-- Developed by @rruss
+- Developed with 💚
