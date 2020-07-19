@@ -57,6 +57,4 @@ If you're faced with error "bad credentials", fix it by reducing security of mai
 For gmail, go to https://myaccount.google.com/lesssecureapps and turn on it.
 
 
-## Contributors
-
-- Developed with 💚
+## Developed with 💚
